@@ -15,6 +15,7 @@ const setCategoryData = (datas) => {
     });
 };
 const getNewsData = (category) => {
+    spinner(true);
     const url = `https://openapi.programming-hero.com/api/news/category/${category}`;
     fetch(url)
     .then(res => res.json())
@@ -54,5 +55,16 @@ const setNewsData = datas => {
         `;
         newsElement.appendChild(newsDiv);
     });
+    spinner(false);
+};
+
+const spinner = (load) => {
+    const spin = document.getElementById('spinner');
+    if(load === true){
+        spin.classList.remove('hidden');
+    }
+    else{
+        spin.classList.add('hidden');
+    }
 };
 getCategoryData();
