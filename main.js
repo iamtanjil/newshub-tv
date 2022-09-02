@@ -1,8 +1,8 @@
 const getCategoryData = () => {
     const url = `https://openapi.programming-hero.com/api/news/categories`;
     fetch(url)
-    .then(res => res.json())
-    .then(data => setCategoryData(data.data.news_category))
+        .then(res => res.json())
+        .then(data => setCategoryData(data.data.news_category))
 };
 const setCategoryData = (datas) => {
     datas.forEach(data => {
@@ -18,8 +18,8 @@ const getNewsData = (category) => {
     spinner(true);
     const url = `https://openapi.programming-hero.com/api/news/category/${category}`;
     fetch(url)
-    .then(res => res.json())
-    .then(data => setNewsData(data.data))
+        .then(res => res.json())
+        .then(data => setNewsData(data.data))
 };
 const setNewsData = datas => {
     const newsElement = document.getElementById('news-container');
@@ -31,7 +31,7 @@ const setNewsData = datas => {
         <img src="${data.thumbnail_url}" alt="" srcset="">
         <div class="p-5">
             <h1>${data.title}</h1>
-            <p>${data.details.slice(0, 200)}</p>
+            <p>${data.details.slice(0, 200)}...</p>
             <div class="flex justify-between items-center mt-10">
                 <div class="flex">
                     <img class="h-12" src="${data.author.img}" alt="">
@@ -48,7 +48,8 @@ const setNewsData = datas => {
                     <i class="fa-regular fa-star"></i>
                     <i class="fa-regular fa-star"></i>
                 </div>
-                <button><i class="fa-solid fa-arrow-right"></i></button>
+                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal"><i class="fa-solid fa-arrow-right"></i>
+                </button>
             </div>
         </div>
     </div>
@@ -57,13 +58,26 @@ const setNewsData = datas => {
     });
     spinner(false);
 };
-
+const getId = id => {
+    const url = `https://openapi.programming-hero.com/api/news/${id}`;
+    fetch(url)
+        .then(res => res.json())
+        .then(data => setModalData(data.data))
+}
+const setModalData = (datas) => {
+    datas.forEach(data => {
+        const modalTitle = document.getElementById('modal');
+        modalTitle.innerHTML =  `
+            <h5 class="modal-title">${data.title}</h5>
+        `;
+    })
+};
 const spinner = (load) => {
     const spin = document.getElementById('spinner');
-    if(load === true){
+    if (load === true) {
         spin.classList.remove('hidden');
     }
-    else{
+    else {
         spin.classList.add('hidden');
     }
 };

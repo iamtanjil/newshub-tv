@@ -10,12 +10,12 @@
 </head>
 <body class="container mx-auto bg-slate-900">
     <!-- Navigation Bar start -->
-    <nav class="bg-slate-800">
+    <nav class="bg-slate-800  border-b border-gray-200">
         <div class="flex items-center justify-between">
             <h1 class="text-4xl font-semibold text-white p-3 ml-10"><span class="bg-purple-900 rounded-lg p-1">News</span>Hub.Tv</h1>
             <div class="text-2xl text-white mr-20 flex items-center">
-                <button class="mr-5 p-3 rounded-lg hover:bg-purple-900">News</button>
-                <button class="p-3 rounded-lg hover:bg-purple-900">Blog</button>
+                <button onclick="getNewsData('08')" class="mr-5 p-3 rounded-lg hover:bg-purple-900">News</button>
+                <a href="blog.html" class="p-3 rounded-lg hover:bg-purple-900">Blog</a>
                 <img class="ml-5 h-12" src="img/user.png" alt="" srcset="">
             </div>
         </div>
@@ -38,6 +38,9 @@
         <span class="sr-only">Loading...</span>
     </div>
     <!-- spinner section end -->
+    <!-- Modal Section Start -->
+    
+    <!-- Modal Section End -->
     <script src="main.js"></script>
 </body>
 </html>
