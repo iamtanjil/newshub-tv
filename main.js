@@ -23,11 +23,26 @@ const getNewsData = (category) => {
 };
 const setNewsData = datas => {
     const newsElement = document.getElementById('news-container');
+    const itemCount = datas.length;
+    if(itemCount === 0){
+        const emptyNews = document.getElementById('empty-news');
+        emptyNews.classList.remove('hidden');
+        const counter = document.getElementById('counter');
+        counter.classList.add('hidden');
+    }
+    else{
+        const emptyNews = document.getElementById('empty-news');
+        emptyNews.classList.add('hidden');
+        const counter = document.getElementById('counter');
+        counter.classList.remove('hidden');
+    }
+    const counter = document.getElementById('counter');
+    counter.innerHTML = `<div class ="bg-slate-800 rounded-lg text-white text-lg m-5  p-5 block">${itemCount} News Found in this category</div>`;
     newsElement.innerHTML = '';
     datas.forEach(data => {
         const newsDiv = document.createElement('div');
         newsDiv.innerHTML = `
-        <div class="bg-slate-800 rounded-lg flex mt-5 text-white text-lg  p-5 ">
+        <div class="bg-slate-800 rounded-lg flex mt-5 text-white text-lg  p-5">
         <img src="${data.thumbnail_url}" alt="" srcset="">
         <div class="p-5">
             <h1>${data.title}</h1>
@@ -48,8 +63,7 @@ const setNewsData = datas => {
                     <i class="fa-regular fa-star"></i>
                     <i class="fa-regular fa-star"></i>
                 </div>
-                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal"><i class="fa-solid fa-arrow-right"></i>
-                </button>
+                <label onclick="getId('${data._id}')" for="my-modal" class="btn modal-button"><i class="fa-solid fa-arrow-right"></i></label>
             </div>
         </div>
     </div>
@@ -66,10 +80,10 @@ const getId = id => {
 }
 const setModalData = (datas) => {
     datas.forEach(data => {
-        const modalTitle = document.getElementById('modal');
-        modalTitle.innerHTML =  `
-            <h5 class="modal-title">${data.title}</h5>
-        `;
+        const title = document.getElementById('title');
+        title.innerText = data.title;
+        const body = document.getElementById('body');
+        body.innerText = data.details;
     })
 };
 const spinner = (load) => {
